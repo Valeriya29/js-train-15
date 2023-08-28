@@ -13,6 +13,15 @@ function generateRandomPassword(length) {
   // Визначаємо випадковий індекс символу зі списку characters та округляємо до найбільшого цілого, яке менше.
   // Отримуємо символ з випадковим індексом.
   // Додаємо отриманий випадковий символ до паролю.
+  let str = "";
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 1; i < length; i++) {
+    let index = Math.floor(Math.random() * characters.length);
+    let randomSymbol = characters[index];
+    str += randomSymbol;
+  }
+  return str;
 }
 
 console.log("Завдання: 1 ==============================");
@@ -32,6 +41,12 @@ function calculateCircleArea(radius) {
   // Повертаємо null, щоб показати, що обчислення не можливе.
   // Обчислення площі кола за формулою PI * r^2, де PI - число Пі, а r - радіус.
   // Повертаємо обчислену площу кола.
+  if (isNaN(radius)) {
+    return null;
+  } else {
+    const area = Math.PI * Math.pow(radius, 2);
+    return `Площа кола радіусом ${radius} = ${area}`;
+  }
 }
 
 console.log("Завдання 2 ==============================");
@@ -52,6 +67,13 @@ function findMinMax(numbers) {
   // Записуємо мінімальне значення масиву в змінну mix
   // Записуємо максимальне значення масиву в змінну max
   // Повертаємо об'єкт {min,max}, що містить знайдені мінімальне та максимальне число.
+  if (Array.isArray(numbers)) {
+    const min = Math.min(...numbers);
+    const max = Math.max(...numbers);
+    return min, max;
+  } else {
+    return null;
+  }
 }
 
 console.log("Завдання 3 ==============================");
@@ -72,6 +94,12 @@ function calculateHypotenuse(a, b) {
   // Повертаємо null, що свідчить про неможливість обробки вхідних даних.
   // Обчислюємо довжину гіпотенузи за теоремою Піфагора. c=√(a² + b²)
   // Повертаємо обчислену довжину гіпотенузи.
+  if (typeof a === "number" && typeof b === "number") {
+    const gipotenuza = Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
+    return `довжина гіпотенузи для прямокутного трикутника з катетами довжиною ${a} та ${b}, буде дорівнювати ${gipotenuza}.`;
+  } else {
+    return null;
+  }
 }
 
 console.log("Завдання 4 ==============================");
@@ -97,6 +125,22 @@ function roundObjectValues(obj) {
   // Якщо значення не є числом, повертаємо оригінальну пару [ключ, значення].
   // Конвертуємо масив пар [ключ, значення] назад в об'єкт за допомогою Object.fromEntries().
   // Повертаємо новий об'єкт з заокругленими значеннями числових властивостей.
+  if (typeof obj === "object" && typeof obj !== null) {
+    let arr = Object.entries(obj);
+    let arr1 = [];
+    arr.map(([key, value], index, array) => {
+      if (typeof value === "number") {
+        value = Math.round(value);
+        arr1.push([key, value]);
+      } else {
+        arr1.push([key, value]);
+      }
+    });
+    return Object.fromEntries(arr1);
+  } else {
+    console.log("Помилка: аргумент має бути об'єктом");
+    return null;
+  }
 }
 
 console.log("Завдання 5 ==============================");
@@ -124,6 +168,12 @@ function calculateVolumeCylinder(radius, height) {
   // Обчислюємо об'єм циліндра за формулою V = PI * r^2 * h, де PI - число Пі, r - радіус, h - висота.
   // Округляємо об'єму до найменшого цілого числа числа що більше.
   // Повертаємо обчислений об'єм.
+  if (typeof radius === "number" && typeof height === "number") {
+    let volume = Math.PI * Math.pow(radius, 2) * height;
+    return Math.ceil(volume);
+  } else {
+    return null;
+  }
 }
 
 console.log("Завдання 6 ==============================");
@@ -145,6 +195,17 @@ function sumPositiveNumbers(numbers) {
   // Перевіряємо, чи є поточне число додатним, використовуючи Math.sign.
   // Якщо число додатнє, додаємо його до суми.
   // Повертаємо суму додатніх чисел.
+  if (Array.isArray(numbers)) {
+    let sum = null;
+    for (const elem of numbers) {
+      if (Math.sign(elem) === 1) {
+        sum += elem;
+      }
+    }
+    return sum;
+  } else {
+    return null;
+  }
 }
 
 console.log("Завдання 7 ==============================");
@@ -164,6 +225,14 @@ function getFractionalPart(num) {
   // Віднімаємо цілу частину від початкового числа, щоб отримати дробову частину.
   // Округлюємо дробову частину з формату double до float.
   // Повертаємо дробову частину числа.
+  if (typeof num === "number") {
+    Math.trunc(num);
+    let part = num - Math.trunc(num);
+    return Math.fround(part);
+  } else {
+    console.log("Помилка: вхідний аргумент має бути числом.");
+    return null;
+  }
 }
 
 console.log("Завдання 8 ==============================");
